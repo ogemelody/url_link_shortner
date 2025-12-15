@@ -6,8 +6,6 @@ A serverless URL shortener service built with AWS Lambda, API Gateway, DynamoDB,
 
 ![Architecture Diagram](url_shortner.drawio.svg)
 
-```
-```
 
 ## Components
 
