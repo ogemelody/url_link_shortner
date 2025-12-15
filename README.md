@@ -64,7 +64,7 @@ A serverless URL shortener service built with AWS Lambda, API Gateway, DynamoDB,
 ## Project Structure
 
 ```
-terraform/
+infrastructure/
 ├── main.tf              # Root configuration
 ├── variables.tf         # Input variables
 ├── outputs.tf          # Output values
@@ -77,12 +77,13 @@ src/
 ├── shorten/            # Shorten URL Lambda
 └── redirect/           # Redirect Lambda
 deploy.sh               # Deployment script
+.gitignore              # Git ignore rules
 ```
 
 ## Deployment
 
 ```bash
-cd terraform
+cd infrastructure
 terraform init
 terraform plan
 terraform apply
