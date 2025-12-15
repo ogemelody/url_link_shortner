@@ -52,14 +52,22 @@ resource "aws_iam_role_policy_attachment" "lambda_dynamodb" {
   role       = aws_iam_role.lambda_role.name
 }
 
+# Create ZIP file for shorten function
+data "archive_file" "shorten_zip" {
+  type        = "zip"
+  source_dir  = "../src/shorten"
+  output_path = "shorten.zip"
+}
+
 # Shorten URL Lambda function
 resource "aws_lambda_function" "shorten" {
-  filename         = "shorten.zip"
+  filename         = data.archive_file.shorten_zip.output_path
   function_name    = "${var.project_name}-${var.environment}-shorten"
   role            = aws_iam_role.lambda_role.arn
   handler         = "index.handler"
   runtime         = "python3.9"
   timeout         = 10
+  source_code_hash = data.archive_file.shorten_zip.output_base64sha256
 
   vpc_config {
     subnet_ids         = var.vpc_subnet_ids
@@ -79,14 +87,22 @@ resource "aws_lambda_function" "shorten" {
   }
 }
 
+# Create ZIP file for redirect function
+data "archive_file" "redirect_zip" {
+  type        = "zip"
+  source_dir  = "../src/redirect"
+  output_path = "redirect.zip"
+}
+
 # Redirect Lambda function
 resource "aws_lambda_function" "redirect" {
-  filename         = "redirect.zip"
+  filename         = data.archive_file.redirect_zip.output_path
   function_name    = "${var.project_name}-${var.environment}-redirect"
   role            = aws_iam_role.lambda_role.arn
   handler         = "index.handler"
   runtime         = "python3.9"
   timeout         = 10
+  source_code_hash = data.archive_file.redirect_zip.output_base64sha256
 
   vpc_config {
     subnet_ids         = var.vpc_subnet_ids

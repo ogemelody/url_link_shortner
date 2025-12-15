@@ -4,16 +4,7 @@
 
 echo "🚀 Deploying URL Shortener MVP..."
 
-# Create Lambda deployment packages
-echo "📦 Creating Lambda deployment packages..."
-
-cd src/shorten
-zip -r ../../infrastructure/shorten.zip .
-cd ../redirect
-zip -r ../../infrastructure/redirect.zip .
-cd ../..
-
-# Deploy with Terraform
+# Deploy with Terraform (ZIP files created automatically)
 echo "🏗️ Deploying infrastructure with Terraform..."
 cd infrastructure
 
