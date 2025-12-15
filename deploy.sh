@@ -23,4 +23,4 @@ terraform apply -auto-approve
 
 echo "✅ Deployment complete!"
 echo "🌐 API Gateway URL: $(terraform output -raw api_gateway_url)"
-echo "📊 DynamoDB Table: $(terraform output -raw dynamodb_table_name)"
+echo " DynamoDB Table: $(terraform output -raw dynamodb_table_name)"
